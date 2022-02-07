@@ -1,16 +1,14 @@
+#define INF 1e9
 class Solution {
   public:
   int minCostSetTime(int startAt, int moveCost, int pushCost, int targetSeconds) {
-    int mini = 1e9;
+    int mini = INF;
     for (int i = 0; i <= 99; i++) {
       for (int j = 0; j <= 99; j++) {
         if (i * 60 + j == targetSeconds) {
           int temp[4] = {i / 10, i % 10, j / 10, j % 10};
           int ptr = 0;
-          while (temp[ptr] == 0) {
-            ptr++;
-          }
-
+          while (temp[ptr] == 0) ptr++;
           int TotalButtonToPush = 4 - ptr;
 
           int tmp = startAt;
