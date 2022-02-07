@@ -9,7 +9,7 @@ class Solution {
           int temp[4] = {i / 10, i % 10, j / 10, j % 10};
           int ptr = 0;
           while (temp[ptr] == 0) ptr++;
-          int TotalButtonToPush = 4 - ptr;
+          int totalButtonToPush = 4 - ptr;
 
           int tmp = startAt;
           int totalMoves = 0;
@@ -21,7 +21,7 @@ class Solution {
             ptr++;
           }
 
-          mini = min(mini, totalMoves * moveCost + TotalButtonToPush * pushCost);
+          mini = min(mini, totalMoves * moveCost + totalButtonToPush * pushCost);
         }
       }
     }
