@@ -12,17 +12,17 @@ class Solution {
         return 1;
       return 0;
     }
-    // set<int> s;
+    set<int> s;
     for (int i = 0; i < n; i++) {
       if (i & 1)
         oddMap[nums[i]] += 1;
       else
         evenMap[nums[i]] += 1;
-      // s.insert(nums[i]);
+      s.insert(nums[i]);
     }
 
-    // if (s.size() == 1)
-    //   return n / 2;
+    if (s.size() == 1)
+      return n / 2;
 
     vector<pair<int, int> > oddV, evenV;
     for (auto [f, s] : oddMap) {
