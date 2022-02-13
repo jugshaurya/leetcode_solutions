@@ -56,8 +56,8 @@ class Solution {
 
     if (evenV.size() == 1) {
       if (oddV[0].second != evenV[0].second) return n - oddV[0].first;
-      int opt1 = n/2 + evenV[0].first - oddV[1].first;
-      int opt2 = n/2 - oddV[1].first;
+      int opt1 = oddV.size() + 1 + evenV[0].first - oddV[1].first;
+      int opt2 = oddV.size() + 1 - oddV[1].first;
       return min(opt1, opt2);
     }
 
