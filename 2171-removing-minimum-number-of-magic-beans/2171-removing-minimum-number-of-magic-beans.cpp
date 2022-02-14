@@ -9,7 +9,7 @@ public:
         sort(beans.begin(), beans.end());
         long long sum = accumulate(beans.begin(), beans.end(), 0L);
         
-        long long ans = 1e18;
+        long long ans = LONG_MAX;
         for(int i = 0; i < n; i++){
             ans = min(ans, sum - (long long)beans[i]*(n-i));
         }        
