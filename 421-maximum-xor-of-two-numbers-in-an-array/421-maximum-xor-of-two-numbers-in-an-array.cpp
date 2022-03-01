@@ -13,7 +13,7 @@ struct Trie{
     
     void insert(int val){
         TrieNode* temp = root;
-        for(int i=30;i>=0;i--){
+        for(int i=29;i>=0;i--){
             int bit = val & (1<< i);
             if(bit){
                 if(!temp->right) temp->right = new TrieNode(val);
@@ -28,7 +28,7 @@ struct Trie{
     int getMaxXorPossible(int val) {
         TrieNode* temp = root;
         int ans = 0;
-        for(int i=30;i>=0;i--){
+        for(int i=29;i>=0;i--){
             int bit = val & (1<< i);
             if(bit) {
                 if(temp->left) {
