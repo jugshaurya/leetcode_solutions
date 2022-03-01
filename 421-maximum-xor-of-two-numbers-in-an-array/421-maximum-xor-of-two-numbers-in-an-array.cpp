@@ -14,7 +14,7 @@ struct Trie{
     void insert(int val){
         TrieNode* temp = root;
         for(int i=31;i>=0;i--){
-            int bit = val & (1<< i);
+            int bit = val & (1LL<< i);
             if(bit){
                 if(!temp->right) temp->right = new TrieNode(val);
                 temp = temp->right;
@@ -29,7 +29,7 @@ struct Trie{
         TrieNode* temp = root;
         int ans = 0;
         for(int i=31;i>=0;i--){
-            int bit = val & (1<< i);
+            int bit = val & (1LL<< i);
             if(bit) {
                 if(temp->left) {
                     temp = temp->left;
