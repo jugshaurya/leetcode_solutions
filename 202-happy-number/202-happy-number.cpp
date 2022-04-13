@@ -14,7 +14,7 @@ public:
     bool isHappy(int n) {
       int t = n;
       int cnt = 0; 
-      while(cnt<100){
+      while(cnt<10){
         cnt++;
         t = getSumOfSquares(t);
         if(t==1) return true;
