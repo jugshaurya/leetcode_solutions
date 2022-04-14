@@ -16,7 +16,7 @@ public:
   
     //     Method 2
     vector<vector<int>> ans;
-    void helper(vector<int>& nums, vector<int> subAns, int i=0) {
+    void helper(vector<int>& nums, vector<int> &subAns, int i=0) {
       if(i==nums.size()){
         ans.push_back(subAns);
         return;
@@ -25,6 +25,7 @@ public:
       helper(nums, subAns, i+1);
       subAns.push_back(nums[i]);
       helper(nums, subAns, i+1);
+      subAns.pop_back();
     }
   
     vector<vector<int>> subsets(vector<int>& nums, int i=0) {
