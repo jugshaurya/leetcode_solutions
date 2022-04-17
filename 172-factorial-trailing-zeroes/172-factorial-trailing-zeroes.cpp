@@ -5,7 +5,7 @@ public:
       int ans = 0;
       int p = 5;
       while(n){
-        ans += floor(n/p);
+        ans += n/p; // floor(n/p)
         n = n/p;
       }
       
