@@ -10,8 +10,6 @@
  * };
  */
 
-using namespace std;
-
 struct ReturnIsBST{
   bool isBST;
   long long maxVal;
@@ -20,12 +18,8 @@ struct ReturnIsBST{
 
 class Solution {
 public:
-    
     ReturnIsBST isValidBSTHelper(TreeNode* root){
-      if(root == NULL){
-        return {true, LONG_MIN, LONG_MAX};
-      }
-      
+      if(root == NULL) return {true, LONG_MIN, LONG_MAX};
       ReturnIsBST leftAns = isValidBSTHelper(root->left);
       ReturnIsBST rightAns = isValidBSTHelper(root->right);
       
@@ -34,9 +28,7 @@ public:
       long long c = min({leftAns.minVal, rightAns.minVal, (long long)root->val}); 
       
       return {a,b,c}; 
-    
     }
-  
   
     bool isValidBST(TreeNode* root) {
       return isValidBSTHelper(root).isBST;
