@@ -10,35 +10,27 @@
  * };
  */
 
-struct Tree{
-    long long min, max;
-    bool isbst;
+struct ReturnIsBST{
+  bool isBST;
+  long long maxVal;
+  long long minVal;
 };
 
 class Solution {
 public:
-    
-Tree checkBST(TreeNode *root){
-    Tree t;
-    if(!root){
-        t.min = LONG_MAX;
-        t.max = LONG_MIN;
-        t.isbst = true;
+    ReturnIsBST isValidBSTHelper(TreeNode* root){
+      if(root == NULL) return {true, LONG_MIN, LONG_MAX};
+      ReturnIsBST leftAns = isValidBSTHelper(root->left);
+      ReturnIsBST rightAns = isValidBSTHelper(root->right);
+      
+      bool a = leftAns.isBST and rightAns.isBST and root->val > leftAns.maxVal and root->val < rightAns.minVal;
+      long long b = max({leftAns.maxVal, rightAns.maxVal, (long long)root->val}); 
+      long long c = min({leftAns.minVal, rightAns.minVal, (long long)root->val}); 
+      
+      return {a,b,c}; 
     }
-    else{
-        Tree Left = checkBST(root->left);
-        Tree Right = checkBST(root->right);
-        t.min = min((long long)root->val, min(Left.min, Right.min));
-        t.max = max((long long)root->val, max(Left.max, Right.max));
-        t.isbst = Left.isbst and Right.isbst and Left.max < root->val and Right.min > root->val;
-    }
-    return t;
-}
   
     bool isValidBST(TreeNode* root) {
-      return checkBST(root).isbst;
+      return isValidBSTHelper(root).isBST;
     }
 };
-
-
-// bool isBST(Node * root){
