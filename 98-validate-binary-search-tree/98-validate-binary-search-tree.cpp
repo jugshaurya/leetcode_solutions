@@ -25,23 +25,6 @@ Tree checkBST(TreeNode *root){
         t.max = LONG_MIN;
         t.isbst = true;
     }
-    else if (!root->left and !root->right){
-        t.min = (long long)root->val;
-        t.max = (long long)root->val;
-        t.isbst = true;
-    }
-    else if (!root->right){
-        Tree Left = checkBST(root->left);
-        t.min = min(Left.min, (long long)root->val);
-        t.max = max(Left.max, (long long)root->val);
-        t.isbst = Left.isbst and Left.max < (long long)root->val;
-    }
-    else if (!root->left){
-        Tree Right = checkBST(root->right);
-        t.min = min(Right.min, (long long)root->val);
-        t.max = max(Right.max, (long long)root->val);
-        t.isbst = Right.isbst and Right.min >(long long)root->val;
-    }
     else{
         Tree Left = checkBST(root->left);
         Tree Right = checkBST(root->right);
@@ -49,7 +32,6 @@ Tree checkBST(TreeNode *root){
         t.max = max((long long)root->val, max(Left.max, Right.max));
         t.isbst = Left.isbst and Right.isbst and Left.max < root->val and Right.min > root->val;
     }
- 
     return t;
 }
   
