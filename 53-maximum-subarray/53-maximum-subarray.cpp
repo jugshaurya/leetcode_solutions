@@ -4,17 +4,15 @@ public:
         int n = nums.size();
         
         // using Kadane's Algo
-        
         // can the subarray considered be empty ? No
         // => Edge Case : If all elements are -ve, return biggest -ve number.
-        bool containsPositive = false;
+
         int biggestNum = nums[0];
         for(int i=0; i<n; i++){
             biggestNum = max(biggestNum, nums[i]);
-            if(nums[i] >= 0) containsPositive = true;
         }
         
-        if(not containsPositive) return biggestNum;
+        if(biggestNum < 0) return biggestNum;
         
         int currentSum = 0;
         int maxSum = INT_MIN;
