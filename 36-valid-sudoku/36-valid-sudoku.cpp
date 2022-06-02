@@ -7,10 +7,8 @@ class Solution {
       set<char> s;
       for (int j = 0; j < 9; j++) {
         if (board[i][j] != '.') {
-          if (s.find(board[i][j]) == s.end())
-            s.insert(board[i][j]);
-          else
-            return false;
+          if (s.find(board[i][j]) == s.end()) s.insert(board[i][j]);
+          else return false;
         }
       }
     }
@@ -19,11 +17,9 @@ class Solution {
     for (int j = 0; j < 9; j++) {
       set<char> s;
       for (int i = 0; i < 9; i++) {
-        if (board[i][j] != '.') {
-          if (s.find(board[i][j]) == s.end())
-            s.insert(board[i][j]);
-          else
-            return false;
+        if (board[i][j] != '.') { 
+          if (s.find(board[i][j]) == s.end()) s.insert(board[i][j]);
+          else return false;
         }
       }
     }
@@ -36,10 +32,8 @@ class Solution {
         for (int ii = i; ii < i + 3; ii++) {
           for (int jj = j; jj < j + 3; jj++) {
             if (board[ii][jj] != '.') {
-              if (s.find(board[ii][jj]) == s.end())
-                s.insert(board[ii][jj]);
-              else
-                return false;
+              if (s.find(board[ii][jj]) == s.end()) s.insert(board[ii][jj]);
+              else return false;
             }
           }
         }
@@ -47,5 +41,5 @@ class Solution {
     }
 
     return true;
-  };
+  }
 };
