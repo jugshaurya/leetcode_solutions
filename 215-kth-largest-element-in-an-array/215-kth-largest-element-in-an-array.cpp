@@ -3,15 +3,11 @@ public:
     
     int partition(vector<int>& nums, int s, int e) {
         
-        // TODO partition Fn
-        
-        int pivot = nums[e], i = s;
-        for (int j = s; j <= e - 1; j++) {
-            if (nums[j] <= pivot) {
-                swap(nums[i], nums[j]);
-                i++;
-            }
-        }
+        int pivot = nums[e];
+        int i = s;
+        for (int j = s; j <= e - 1; j++) 
+            if (nums[j] <= pivot) swap(nums[i++], nums[j]);
+
         swap(nums[i], nums[e]);
         return i;
     }
