@@ -5,6 +5,7 @@ public:
         
         int pivot = nums[e];
         int i = s;
+        
         for (int j = s; j <= e - 1; j++) 
             if (nums[j] <= pivot) swap(nums[i++], nums[j]);
 
