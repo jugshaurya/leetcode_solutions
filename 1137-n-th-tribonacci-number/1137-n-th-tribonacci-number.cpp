@@ -1,8 +1,12 @@
 class Solution {
 public:
     int tribonacci(int n) {
+        
+        if(n < 2) return n;
+        if(n == 2) return 1;
+        
         //=============Bottom up======================
-        vector<int> dp(n+3, 0);
+        vector<int> dp(n+1, 0);
         dp[1] = 1;
         dp[2] = 1;
         for (int i = 3; i<=n; i++){
