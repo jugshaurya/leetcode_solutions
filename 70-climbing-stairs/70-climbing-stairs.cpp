@@ -8,7 +8,6 @@ class Solution {
     //         for (int i = 3; i<=n; i++){
     //            dp[i] = dp[i-1] + dp[i-2];
     //         }
-
     //         return dp[n];
 
     //============= Space Optimized ======================
@@ -23,4 +22,5 @@ class Solution {
 
     return n == 1 ? 1 : (n == 2 ? 2 : c);
   }
+
 };
