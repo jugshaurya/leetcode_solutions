@@ -31,10 +31,10 @@ class Solution {
     // ans += minRoundsNeeded(cnt);
     // return ans;
 
-    // Method 2: using Hashing + DP
+    // Method 2: using Hashing + DP =  O(n)
     
     int n = tasks.size();
-    map<int, int> m;
+    unordered_map<int, int> m;
     for (int i = 0; i < n; i++) m[tasks[i]]++;
 
     dp = vector<int>(n + 1, -1);
