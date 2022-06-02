@@ -8,7 +8,6 @@ public:
         // get a matrix of dimension(n,m) using given matrix of (m,n)     
         
         vector<vector<int> > mat(n, vector<int>(m));
-        //         
         for(int i=0;i<n;i++)
             for(int j=0;j<m;j++)
                 mat[i][j] = matrix[j][i];
