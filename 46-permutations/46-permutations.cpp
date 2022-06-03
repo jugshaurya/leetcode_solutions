@@ -37,8 +37,8 @@ public:
         
         if(start == end){
             // we got a permutation
-            vector<int> per = nums;
-            ans.push_back(per);
+            // vector<int> per = nums;
+            ans.push_back(nums);
             return ;
         }
         
