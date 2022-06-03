@@ -22,10 +22,11 @@ public:
     }
     
     int findKthLargest(vector<int>& nums, int k) {
-        // Method 1: can use QuickSelect Algorithm
+        // Method 1: can use QuickSelect Algorithm O(n^2)
+        // In worst Case: T(n) =  T(n-1)  + O(n) 
         return usingQuickSelect(nums, k, 0, nums.size()-1);
 
-        // Method 2: can use PQ
+        // Method 2: can use PQ O(n + klogn)
         // priority_queue<int> pq(nums.begin(), nums.end());
         // k--; 
         // while(k--){
