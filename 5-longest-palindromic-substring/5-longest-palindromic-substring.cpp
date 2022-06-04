@@ -44,7 +44,7 @@ public:
                 // element [0+j][i+j]
                 int row = 0+j;
                 int col = i+j;
-                if(col<n){
+                if(j<n and col<n){
                     isPal[row][col] = s[row] != s[col] ? 0 : (row+1==col ? 1 : isPal[row+1][col-1]);   
                 }
             }
