@@ -1,82 +1,43 @@
 class Solution {
   public:
-  vector<int> l[21 * 21];
-  int no, n, m;
-    
-  void add_edge(int x, int y) {
-    l[x].push_back(y);
-  }
-    
-  int mincostbfs(int src, int dest) {
+  int snakesAndLadders(vector<vector<int>>& board) {
+    int n = board.size();
+    // flipping the board: used later see comments. :)
+    reverse(board.begin(), board.end());
+      
     queue<int> q;
     vector<bool> visited((n * n) + 1, false);
     vector<int> dist((n * n) + 1, 0);
-      
-    q.push(src);
-    visited[src] = true;
-    dist[src] = 0;
+
+    q.push(1);
+    visited[1] = true;
+    dist[1] = 0;
+
     while (!q.empty()) {
       int f = q.front();
       q.pop();
-      for (int nbr : l[f]) {
-        if (!visited[nbr]) {
-          q.push(nbr);
-          visited[nbr] = true;
-          dist[nbr] = dist[f] + 1;
-        }
-      }
-    }
-      
-    for(auto x: dist) {
-        cout<<x<<" ";
-    }
-      
-    cout<<endl; 
-    
-     return dist[dest] == 0 ? -1 : dist[dest];
-  }
-    
-  int snakesAndLadders(vector<vector<int>>& board) {
-    n = board.size();
-    m = board[0].size();
-    no = 1;
-    vector<int> b(441, 0);
-    int c = 2;
-    
-    for (int i = n - 1; i >= 0; i--) {
-      if (c % 2 == 0) {
-        for (int j = 0; j < m; j++) {
-          if (board[i][j] != -1) {
-            b[no] = board[i][j] - no;
-          }
-          no++;
-        }
-      } else {
-        for (int j = m - 1; j >= 0; j--) {
-          if (board[i][j] != -1) {
-            b[no] = board[i][j] - no;
-          }
-          no++;
-        }
-      }
-      c++;
-    }
-    no--;
-      
-    // for(int i=1;i<no;i++) {
-    //     cout<<b[i]<<" ";
-    // }
-      
-    for (int i = 1; i <= n * n; i++) {
+
       for (int dice = 1; dice <= 6; dice++) {
-        int v = i + dice;
-        v += b[v];
-        if (v <= n * n)
-          add_edge(i, v);
+        int nbr = f + dice;
+        if(nbr <= n*n){
+            
+            // board is given from higher value to lower value 
+            // flipping the board will come handy here.
+            int nbrRow = (nbr-1) / n; // 16
+            int col = nbr - nbrRow * n - 1;  
+            int nbrCol = nbrRow % 2 == 0 ? col : n - col-1;  
+
+            int actualNbr = board[nbrRow][nbrCol] == -1 ? nbr : board[nbrRow][nbrCol];
+            if (!visited[actualNbr]) {
+              q.push(actualNbr);
+              visited[actualNbr] = true;
+                if(actualNbr==n*n) cout<<dist[f]<<endl; 
+              dist[actualNbr] = dist[f] + 1;
+            }
+        }
       }
     }
-      
-    return mincostbfs(1, no);
+        
+    return visited[n*n] ? dist[n * n]: -1;
   }
 };
-
