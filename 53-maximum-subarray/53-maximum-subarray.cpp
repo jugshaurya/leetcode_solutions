@@ -8,7 +8,7 @@ struct ReturnType {
 class Solution {
   public:
   int maxSubArray(vector<int>& nums) {
-    // Method 1: using Kadane's Algo O(n)
+    // Method 1: using Kadane's Algo O(n), space = O(1)
     // int n = nums.size();
     // int currentSum = 0;
     // int maxSum = INT_MIN;
@@ -19,10 +19,10 @@ class Solution {
     // }
     // return maxSum;
 
-    // Method 2: using DP - Kadane's is the space optimized version of this solution
+    // Method 2: using DP 
+    // Time O(n), space = O(n) - Kadane's is the space optimized version of this solution
     // int n = nums.size();
     // int dp[n+1];
-
     // int ans = INT_MIN;
     // for(int i=0;i<n;i++){
     //     if(i) dp[i] = nums[i] + max(0, dp[i-1]);
@@ -31,7 +31,8 @@ class Solution {
     // }
     // return ans;
 
-    // Method 3: using Divide and Conquer
+    // Method 3: using Divide and Conquer O(n)
+    // T(n) = 2T(n/2) + O(1) => Time is O(n), space O(logn) stack space
     int n = nums.size();
     return helper(nums, 0, n - 1).ms;
   }
