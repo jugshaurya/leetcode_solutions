@@ -61,15 +61,18 @@ public:
             return; 
         }
         
+        // since we are iterating on map, we should not change it inside.
+        // otherwise map way collapse and iterate less number of times.
         map<int, int> tmp = mp;
-        for(auto x: tmp) {
-            int f = x.first;
-            mp[f]--;
+        
+        for(auto [f,s]: tmp) {
 
+            mp[f]--;
             if(mp[f] == 0) mp.erase(f);
- 
             ans.push_back(f);
+            
             helper(mp, ans, res);
+
             ans.pop_back();
             mp[f]++;
         }
