@@ -2,6 +2,7 @@ class Solution {
   public:
   int snakesAndLadders(vector<vector<int>>& board) {
     int n = board.size();
+      
     // flipping the board: used later see comments. :)
     reverse(board.begin(), board.end());
       
@@ -23,7 +24,7 @@ class Solution {
             
             // board is given from higher value to lower value 
             // flipping the board will come handy here.
-            int nbrRow = (nbr-1) / n; // 16
+            int nbrRow = (nbr-1) / n;
             int col = nbr - nbrRow * n - 1;  
             int nbrCol = nbrRow % 2 == 0 ? col : n - col-1;  
 
