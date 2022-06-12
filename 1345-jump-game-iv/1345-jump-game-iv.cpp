@@ -1,8 +1,9 @@
 class Solution {
 public:
+    // Time: O(n)
+    // Space: O(n)
     int minJumps(vector<int>& arr) {
         int n = arr.size();
-        
         map<int,vector<int>> m;
         for(int i=0;i<n;i++) m[arr[i]].push_back(i); 
 
@@ -30,6 +31,9 @@ public:
                     dist[x] = dist[f] + 1;
                 }                    
             }
+            // very important step as this converts TLE to Accepted.
+            // as by erasing it, we are removing the cases, when same value 
+            // iterate over the already iterated map vector. 
             m.erase(arr[f]);
         }
         
