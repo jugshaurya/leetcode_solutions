@@ -1,7 +1,9 @@
+// using adjacency matrix
 class Solution {
   public:
   int minTrioDegree(int n, vector<vector<int>>& edges) {
-      
+    
+    // create adjacency matrix
     vector<vector<int>> gr(n + 1, vector<int>(n + 1, 0));
     for (auto edge : edges) {
       int x = edge[0];
@@ -9,7 +11,8 @@ class Solution {
       gr[x][y] = 1;
       gr[y][x] = 1;
     }
-
+    
+    // calculate degree of each vertex
     vector<int> degree(n + 1, 0);
     for (int i = 1; i <= n; i++) {
       for (int j = 1; j <= n; j++) {
@@ -17,17 +20,12 @@ class Solution {
       }
     }
 
-    // get all triplets that are forming a cycle
+    // get all triplets and check it they form a 3-length cycle(trio)
     int ans = 1e9;
     for (int i = 1; i <= n; i++) {
       for (int j = i + 1; j <= n; j++) {
-        // i and j must have edge to each other
-        if (gr[i][j] == 0)
-          continue;
-        // find common element
         for (int k = j+1; k <= n; k++) {
-          if (gr[i][k] + gr[j][k] == 2) {
-            // if *it contains edge to both i and j then it is 3length cycle
+          if (gr[i][j] + gr[j][k] + gr[i][k] == 3) {
             ans = min(ans, degree[i] + degree[j] + degree[k] - 6);
           };
         }
@@ -36,9 +34,14 @@ class Solution {
 
     return ans == 1e9 ? -1 : ans;
   }
+};
 
-  //     // using adjacency list: TLE
-  //     int minTrioDegree(int n, vector<vector<int>>& edges) {
+// Method2 : using adjacency list: TLE
+// using adjacency matrix
+
+// class Solution {
+//   public:
+// int minTrioDegree(int n, vector<vector<int>>& edges) {
   //        vector<set<int> > gr(n+1);
   //         for(auto x: edges) {
   //             gr[x[0]].insert(x[1]);
@@ -78,8 +81,6 @@ class Solution {
   //         for(auto x: triplets){
   //             ans = min(ans, degree[x[0]] + degree[x[1]] + degree[x[2]] - 6);
   //         }
-
   //         return ans;
-
   //     }
-};
+// };
