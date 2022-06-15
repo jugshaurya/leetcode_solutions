@@ -71,6 +71,7 @@ public:
             hea.pop(); // like q.pop()
             
             if(dist[node] < weighTillNow) continue;
+            // if(dist[node] != weighTillNow) continue; // this works as well
             
             for(auto [child, childWeigh]: gr[node]){
                 if(dist[child] > weighTillNow + childWeigh) {
