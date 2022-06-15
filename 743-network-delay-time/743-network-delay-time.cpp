@@ -70,7 +70,7 @@ public:
             auto [weighTillNow, node] = hea.top(); // like q.front() 
             hea.pop(); // like q.pop()
             
-            // if(dist[node] != weighTillNow) continue;
+            if(dist[node] < weighTillNow) continue;
             
             for(auto [child, childWeigh]: gr[node]){
                 if(dist[child] > weighTillNow + childWeigh) {
