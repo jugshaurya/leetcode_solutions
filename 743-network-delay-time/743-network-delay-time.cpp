@@ -31,7 +31,7 @@ public:
             
             for(auto [child, childWeigh]: gr[node]){
                 if(dist[child] > weighTillNow + childWeigh) {
-                    s.erase({dist[child], child});
+                    // s.erase({dist[child], child});
                     dist[child] = weighTillNow + childWeigh;
                     s.insert({dist[child], child});
                 }
