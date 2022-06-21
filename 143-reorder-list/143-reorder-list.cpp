@@ -53,21 +53,18 @@ public:
                 finalTail->next = head2;
                 head2 = head2->next;
                 head = n;
-                cnt = cnt^1;
-                finalTail = finalTail->next;
             }else{
                 ListNode* n = finalTail->next; 
                 finalTail->next = head;
                 head = head->next;
                 head2 = n;
-                cnt = cnt^1;
-                finalTail = finalTail->next;
             }
+            cnt = cnt^1;
+            finalTail = finalTail->next;
         }
         
         if(head==NULL) finalTail->next = head2;
         if(head2==NULL) finalTail->next = head;
-        
     }
     
     void reorderList(ListNode* head) {
