@@ -13,6 +13,7 @@ public:
        
         if(head == NULL) return NULL;
         
+        // starting point must be same
         ListNode* slow = head;
         ListNode* fast = head;
         
