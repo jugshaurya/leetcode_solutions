@@ -31,7 +31,6 @@ public:
         headB = headB->next;
     }
     
-    
     while(true){
         if(topB == topA) return topB;        
         topB = topB->next;
