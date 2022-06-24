@@ -6,12 +6,11 @@ public:
         stack<int> s;
         
         vector<int> ans;
+        // Tip: Traverse from right
         for(int i=n-1;i>=0;i--){
-            
             while(!s.empty() and s.top() <= num[i]){
                 s.pop();
             }
-            
             if(s.empty()) {
                 s.push(num[i]);
                 ans.push_back(-1);
@@ -38,7 +37,6 @@ public:
         vector<int> nge = getNextGreaterElement(nums2);
         
         vector<int> ans;
-        
         // O(nums1.length)
         for(auto x: nums1){
             ans.push_back(nge[mp[x]]);
