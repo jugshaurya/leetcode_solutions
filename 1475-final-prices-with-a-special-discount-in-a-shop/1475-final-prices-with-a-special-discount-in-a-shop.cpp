@@ -1,6 +1,8 @@
 class Solution {
 public:
 
+    // O(nums.length) Time
+    // O(nums.length) Space
     // Next smaller or equal Element
     vector<int> getNextSmallerOrEqual(vector<int>& nums) {
         // Tip: Traverse from right
@@ -9,7 +11,6 @@ public:
         vector<int> ans;
         
         for(int i=n-1; i>=0; i--){
-            
             while(!s.empty() and s.top() > nums[i]){
                 s.pop();
             }
@@ -31,6 +32,7 @@ public:
         return ans;
     }
      
+    // O(prices.length)
     vector<int> finalPrices(vector<int>& prices) {
         int n = prices.size();
         vector<int> discounts = getNextSmallerOrEqual(prices);
