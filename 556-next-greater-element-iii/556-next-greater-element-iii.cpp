@@ -11,7 +11,7 @@ public:
             ans = ans*10 + (num[i]-'0'); 
         }
         
-        if(ans > INT_MAX) return -1;
+        if(ans > ((1LL << 31) - 1)) return -1;
         return ans;
     }
 };
