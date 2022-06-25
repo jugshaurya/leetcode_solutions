@@ -15,7 +15,8 @@ public:
         
         int ans = 0;
         
-        // dont take `=` because, we dont want area formed by single building. 
+        // Here `=` can be ommited, becaus we don't want area formed by single building.
+        // can take it because it taht case area would be 0. and wont effect out max value.
         while(i <= j) {
             ans = max(ans, (j-i)*(min(height[j], height[i])));
             if(height[i] < height[j])  i++;
