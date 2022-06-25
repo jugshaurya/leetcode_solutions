@@ -16,7 +16,7 @@ public:
         int ans = 0;
         
         // dont take `=` because, we dont want area formed by single building. 
-        while(i < j) {
+        while(i <= j) {
             ans = max(ans, (j-i)*(min(height[j], height[i])));
             if(height[i] < height[j])  i++;
             else j--;
