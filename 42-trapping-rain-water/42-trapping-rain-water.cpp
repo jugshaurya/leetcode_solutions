@@ -12,11 +12,13 @@ public:
         int rmax = -1;
         
         int ans = 0;
+        // using maths
         while(i <= j) {
             lmax = max(lmax, height[i]);
             rmax = max(rmax, height[j]);
             
-            if(lmax < rmax){
+            // if(height[i] < height[j]){ // this works as well 
+            /* instead of this */ if(lmax < rmax){
                 ans += lmax - height[i];
                 i++;
             }else{
