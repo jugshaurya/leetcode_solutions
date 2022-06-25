@@ -85,7 +85,57 @@
 // };
 
 // ===========================================================
-// FloowUp: Using only one queue
+// // FollowUp Method 1: Using only one queue
+// // Push - O(n)
+// // Pop, top - O(1)
+// class MyStack {
+// public:
+    
+//     queue<int> q;
+//     MyStack() {
+        
+//     }
+    
+//     // push O(n)
+//     // we push on rear end and will keep on poping front and reinsert into queue.
+//     // how may times? size times.
+//     // rather than pushing at the rear end
+    
+//     void push(int x) {
+//         if(q.empty()) {
+//             q.push(x);
+//             return ;
+//         }
+        
+//         int size = q.size();
+//         q.push(x);
+//         while(size--){
+//             int val = q.front();
+//             q.pop();
+//             q.push(val);
+//         }
+//     }
+    
+//     // O(1)
+//     int pop() {
+//         int val = q.front();
+//         q.pop();
+//         return val;
+//     }
+    
+//     // O(1)
+//     int top() {
+//         return q.front();
+//     }
+    
+//     bool empty() {
+//         return q.empty();
+//     }
+// };
+
+// FollowUp: Method 2: Using only one queue
+// Push - O(1)
+// Pop, top - O(n)
 class MyStack {
 public:
     
@@ -94,36 +144,32 @@ public:
         
     }
     
-    // push O(n)
-    // we push on rear end and will keep on poping front and reinsert into queue.
-    // how may times? size times.
-    // rather than pushing at the rear end
-    
+    // push O(1)
     void push(int x) {
-        if(q.empty()) {
-            q.push(x);
-            return ;
-        }
+        q.push(x);
+    }
+    
+    // O(n)
+    int pop() {
+        if(q.empty()) return -1;
         
         int size = q.size();
-        q.push(x);
-        while(size--){
+        size -= 1;
+        while(size--) {
             int val = q.front();
             q.pop();
             q.push(val);
         }
-    }
-    
-    // O(1)
-    int pop() {
-        int val = q.front();
-        q.pop();
+        
+        int val = q.front(); q.pop();
         return val;
     }
     
-    // O(1)
+    // O(n)
     int top() {
-        return q.front();
+        int val = this->pop();
+        q.push(val);
+        return val;
     }
     
     bool empty() {
