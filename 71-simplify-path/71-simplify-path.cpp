@@ -6,7 +6,7 @@ public:
         stringstream check1(path);
         string temp;
         while(getline(check1, temp, '/')){
-            if(temp.size()==0) continue;
+            if(temp.size() == 0) continue;
             tokens.push_back(temp);
         }
         
@@ -18,11 +18,17 @@ public:
             st.push(x);
         }
         
-        string ans = "";
+        list<string> l;
         while(!st.empty()) {
-            ans = st.top() + ans;
-            ans = "/" + ans;
+            l.push_front(st.top());
+            l.push_front("/");
             st.pop();
+        }
+        
+        string ans = "";
+        while(!l.empty()){
+            ans += l.front();
+            l.pop_front();
         }
         
         if(ans == "") return "/";
