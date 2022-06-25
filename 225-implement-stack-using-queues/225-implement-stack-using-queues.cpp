@@ -43,72 +43,93 @@
 // };
 
 // ===========================================================
+// // Method2: using 2 queues
+// // Push - O(n)
+// // Pop, top - O(1)
+// class MyStack {
+// public:
+//     queue<int> q1;
+//     queue<int> q2;
+    
+//     MyStack() {
+//     }
+    
+//     // Logic: I will always push to q1's front
+//     // O(n)
+//     void push(int x) {
+//         q2.push(x);
+//         while(!q1.empty()){
+//             q2.push(q1.front());
+//             q1.pop();
+//         }
+        
+//         swap(q1, q2);
+//     }
+    
+//     // O(1)
+//     int pop() {
+//         int val = q1.front();
+//         q1.pop();
+//         return val;
+//     }
+    
+//     // O(1)
+//     int top() {
+//         return q1.front();
+//     }
+    
+//     //  O(1)
+//     bool empty() {
+//         return q1.empty();    
+//     }
+// };
 
-// Method2: using 2 queues
-// Push - O(n)
-// Pop, top - O(1)
-
+// ===========================================================
+// FloowUp: Using only one queue
 class MyStack {
 public:
-    queue<int> q1;
-    queue<int> q2;
     
+    queue<int> q;
     MyStack() {
+        
     }
     
-    // Logic: I will always push to q1 front
-    // O(n)
+    // push O(n)
+    // we push on rear end and will keep on poping front and reinsert into queue.
+    // how may times? size times.
+    // rather than pushing at the rear end
+    
     void push(int x) {
-        q2.push(x);
-        while(!q1.empty()){
-            q2.push(q1.front());
-            q1.pop();
+        if(q.empty()) {
+            q.push(x);
+            return ;
         }
         
-        swap(q1, q2);
+        int size = q.size();
+        q.push(x);
+        while(size--){
+            int val = q.front();
+            q.pop();
+            q.push(val);
+        }
     }
     
     // O(1)
     int pop() {
-        int val = q1.front();
-        q1.pop();
+        int val = q.front();
+        q.pop();
         return val;
     }
     
     // O(1)
     int top() {
-        return q1.front();
+        return q.front();
     }
     
-    //  O(1)
     bool empty() {
-        return q1.empty();    
+        return q.empty();
     }
 };
-
-// using one queue
-// class MyStack {
-// public:
-//     MyStack() {
-        
-//     }
-    
-//     void push(int x) {
-        
-//     }
-    
-//     int pop() {
-        
-//     }
-    
-//     int top() {
-        
-//     }
-    
-//     bool empty() {
-        
-//     }
-// };
 
 /**
  * Your MyStack object will be instantiated and called as such:
