@@ -1,39 +1,25 @@
 class Solution {
 public:
     int trap(vector<int>& height) {
-      int n = height.size();
-      vector<int> leftMaxValues(n,-1);
-      vector<int> rightMaxValues(n,-1);
-      
-      leftMaxValues[0] = -1;
-      int maxx = height[0];
-      for(int i=1;i<n;i++){
-          if(height[i] < maxx){
-            leftMaxValues[i] = maxx;
-          }else{
-            maxx = height[i];
-            leftMaxValues[i] = -1;
-          }
-      }
-      
-      rightMaxValues[n-1] = -1;
-      maxx = height[n-1];
-      for(int i=n-2;i>=0;i--){
-          if(height[i] < maxx){
-            rightMaxValues[i] = maxx;
-          }else{
-            maxx = height[i];
-            rightMaxValues[i] = -1;
-          }
-      }
-      
-      
-      int ans = 0;
-      for(int i=0;i<n;i++){
-        if(leftMaxValues[i]==-1 or rightMaxValues[i]==-1) continue;
-        else ans += min(leftMaxValues[i], rightMaxValues[i]) - height[i];
-      }
-      
-      return ans;
+        
+        int n = height.size();
+        vector<int> lmax(n), rmax(n);
+        
+        for(int i=0; i<n; i++){
+            if(i) lmax[i] = max(lmax[i-1], height[i]);
+            else lmax[i] = height[i];
+        }
+        
+        for(int i=n-1; i>=0; i--){
+            if(i != n-1) rmax[i] = max(rmax[i+1], height[i]);
+            else rmax[i] = height[i];
+        }
+        
+        int ans =0 ;
+        for(int i=0; i<n; i++){
+            ans +=  min(lmax[i], rmax[i])- height[i];
+        }
+        
+        return ans;
     }
 };
