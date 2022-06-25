@@ -17,8 +17,8 @@ public:
             lmax = max(lmax, height[i]);
             rmax = max(rmax, height[j]);
             
-            // if(height[i] < height[j]){ // this works as well 
-            /* instead of this */ if(lmax < rmax){
+            if(height[i] < height[j]){ // this works as well 
+            // /* instead of this */ if(lmax < rmax){
                 ans += lmax - height[i];
                 i++;
             }else{
