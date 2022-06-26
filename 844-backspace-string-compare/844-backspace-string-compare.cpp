@@ -5,9 +5,10 @@ public:
       int m = t.size();
       int i = n-1;
       int j = m-1;
+      
       while(true){
-        if(i<0 and j<0) break;
 
+        if(i<0 and j<0) break;
         if(i>=0 and j>=0 and s[i] == t[j] and s[i]!='#' and t[j]!='#') {
           i--;
           j--;
