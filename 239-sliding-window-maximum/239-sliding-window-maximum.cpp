@@ -14,7 +14,7 @@ public:
         res.push_back(nums[dq.front()]);
         
         for(int i = k; i < n; i++) {
-            while(!dq.empty() and dq.front() < i - k + 1) dq.pop_front();
+            if(!dq.empty() and dq.front() < i - k + 1) dq.pop_front();
             while(!dq.empty() and nums[dq.back()] <= nums[i]) dq.pop_back();
             dq.push_back(i);
             res.push_back(nums[dq.front()]);
