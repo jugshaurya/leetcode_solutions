@@ -22,7 +22,6 @@ public:
         
         if(leftAns.first == NULL) {
             root->right = rightAns.first;
-            root->left = NULL;
             return {root, rightAns.second};
         }  
         
