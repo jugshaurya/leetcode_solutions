@@ -11,55 +11,53 @@ public:
 
 class Solution {
 public:
-    void print(Node* head){
-        if(head==NULL) return;
-        while(head){
-            cout<<head->val<<" ";
-            head= head->next;
-        }
-        
-    }
-    
     Node* flatten(Node* head) {
         if(head == NULL) return NULL;
         if(head->next == NULL and head->child == NULL) return head;
         
         if(head->child == NULL){
+            // break the links both next and prec
             Node* remainingHead = head->next;
             head->next = NULL;
             remainingHead->prev = NULL;
-
+            
+            // bring answer from recusion call
             Node* subAns = flatten(remainingHead);
+
+            // connect both prev and next pointers back in place
             head->next = subAns;
             subAns->prev = head;
+            
             return head;
         }
         
-        Node* child = head->child;
+        // get answer for child
+        Node* childHead = head->child;
         head->child = NULL;
+        Node* subAnsChild = flatten(childHead);
         
-        Node* subAnsChild = flatten(child);
-        
-        Node* remainingHead = head->next;
-        head->next = NULL;
-        if(remainingHead == NULL) {
+        // if next does not exist, connect only the child answer
+        if(head->next == NULL){
             head->next = subAnsChild;
             subAnsChild->prev = head;
             return head;
         }
-        remainingHead->prev = NULL;
-        Node* subAnsNext = flatten(remainingHead);
         
+        // otherwise both child and next exist
+        Node* nextHead = head->next;
+        head->next = NULL;
+        nextHead->prev = NULL;
+        Node* subAnsNext = flatten(nextHead);
+        
+        // combine the answer to get the result
         head->next = subAnsChild;
         subAnsChild->prev = head;
+        
         Node* tmp = subAnsChild;
-        while(tmp and tmp->next){
-            tmp = tmp->next;
-        }
+        while(tmp->next != NULL) tmp = tmp->next;
+        
         tmp->next = subAnsNext;
         subAnsNext->prev = tmp;
-        
-        print(head);
         return head;
         
     }
