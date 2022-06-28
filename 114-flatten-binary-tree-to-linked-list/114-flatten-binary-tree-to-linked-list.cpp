@@ -9,34 +9,33 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
 class Solution {
 public:
-    
-    pair<TreeNode*, TreeNode*> helper(TreeNode* root){
-        if(root == NULL) return {NULL,NULL};
+    pair<TreeNode*,TreeNode*> helper(TreeNode* root){
+        if(root == NULL) return {NULL, NULL};
         
-        auto leftLL = helper(root->left);
-        auto rightLL = helper(root->right);
+        auto leftAns = helper(root->left);
+        auto rightAns = helper(root->right);
         
-        if(leftLL.first==NULL and rightLL.first==NULL) return {root, root};
+        if(leftAns.first == NULL and rightAns.first == NULL) return {root, root};
         
-        TreeNode* head = root;
+        if(leftAns.first == NULL) {
+            root->right = rightAns.first;
+            root->left = NULL;
+            return {root, rightAns.second};
+        }  
         
-        if(leftLL.first==NULL) {
-            head->right = rightLL.first;
-            return {head, rightLL.second};
-        }
-            
-        if(rightLL.first==NULL) {
-            head->left=NULL;
-            head->right = leftLL.first;
-            return {head, leftLL.second};
+        if(rightAns.first == NULL) {
+            root->right = leftAns.first;
+            root->left = NULL;
+            return {root, leftAns.second};
         }
         
-        root->right = leftLL.first;
-        root->left=NULL;
-        leftLL.second->right = rightLL.first;
-        return {head, rightLL.second};
+        root->right = leftAns.first;
+        root->left = NULL;
+        leftAns.second->right = rightAns.first;
+        return {root, rightAns.second};
     }
     
     void flatten(TreeNode* root) {
