@@ -10,50 +10,49 @@
  */
 class Solution {
 public:
-    
-    // Iterative
     ListNode* reverseList(ListNode* head) {
         ListNode* curr = head;
         ListNode* prev = NULL;
         ListNode* next = NULL;
+        
         while(curr != NULL){
             next = curr->next;
             curr->next = prev;
-            prev = curr;
+            prev = curr; 
             curr = next;
         }
+        
         return prev;
     }
-    
     ListNode* reverseBetween(ListNode* head, int left, int right) {
+        if(head==NULL or head->next==NULL) return head;
         
-        ListNode* dummy = new ListNode();
-        dummy->next = head;
+        ListNode* leftPrev = NULL;
+        ListNode* leftHead = head;
         
-        ListNode* leftPointer = dummy;
-        ListNode* rightPointer = dummy;
-        
-        while(--left){
-            leftPointer = leftPointer->next;
+        while(--left) {
+            leftPrev = leftHead;
+            leftHead = leftHead->next;
         }
         
-        while(right--){
-            rightPointer = rightPointer->next;
+        ListNode* rightHead = head;
+        while(--right){
+            rightHead = rightHead->next;
         }
         
-        ListNode* start = leftPointer->next;
-        leftPointer->next = NULL;
-        ListNode* end = rightPointer->next;
-        rightPointer->next = NULL;
-        ListNode* reversedHead = reverseList(start);
-        leftPointer->next = reversedHead;
-        start->next = end;
+        ListNode* rightRemainingLL = rightHead->next;
+        rightHead->next = NULL;
         
-        ListNode* ans = dummy->next;
-        dummy->next=NULL;
-        delete dummy;
-        return ans;
+        if(leftPrev == NULL){
+            ListNode* newHead = reverseList(head); 
+            head->next = rightRemainingLL;
+            return newHead;
+        }
         
-        
+        leftPrev->next = NULL;
+        ListNode* newHead = reverseList(leftHead);
+        leftPrev->next = newHead; 
+        leftHead->next = rightRemainingLL;
+        return head;
     }
 };
