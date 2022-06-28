@@ -10,6 +10,9 @@
  */
 class Solution {
 public:
+
+    // using mergeTwoLists (complexity: kllogk); 
+    // (1e4* 500 * log(10000) = 4*1e7)
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         ListNode* newHead = NULL;
         ListNode* newTail = NULL;
