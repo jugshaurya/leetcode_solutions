@@ -5,14 +5,10 @@ public:
     int partition(vector<int>& nums, int s, int e) {
         int pivot = nums[e];
         int i = s;
-        int j = s;
-        while(j <= e){
-            if(nums[j] <= pivot){
-                swap(nums[i++], nums[j]);
-            }
-            j++;
-        }
-        return i-1;
+        for (int j = s; j <= e - 1; j++) 
+            if (nums[j] <= pivot) swap(nums[i++], nums[j]);
+        swap(nums[i], nums[e]);
+        return i;
     }
     
     int usingQuickSelect(vector<int>& nums, int k, int s, int e) {
