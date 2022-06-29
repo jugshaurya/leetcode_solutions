@@ -23,6 +23,7 @@ Output 2:
  [1, 1, 1, 1]
 
 */
+// Method1: using map size.
 vector<int> Solution::dNums(vector<int> &nums, int k) {
     map<int,int> mp;
     for(int i=0; i<k; i++) mp[nums[i]]++;
@@ -39,6 +40,34 @@ vector<int> Solution::dNums(vector<int> &nums, int k) {
         if(mp[nums[last]] == 0) mp.erase(nums[last]);
         j++;
         ans.push_back(mp.size());
+    }
+    return ans;
+}
+
+// Method 2: Better - using cnt variable 
+// erase operatio is costly, thats why it is better. 
+vector<int> Solution::dNums(vector<int> &nums, int k) {
+    map<int,int> mp;
+    int cnt = 0;
+    for(int i=0; i<k; i++) {
+        if(mp.count(nums[i]) == 0) cnt++;
+        mp[nums[i]]++;
+    }
+    
+    vector<int> ans;
+    ans.push_back(cnt);
+    
+    int n = nums.size();
+    int j = k;
+    while(j<n) {
+        if(mp.count(nums[j]) == 0) cnt++;
+        if(mp.count(nums[j]) == 1 and mp[nums[j]] == 0) cnt++;
+        mp[nums[j]]++;
+        int last = j-k;
+        mp[nums[last]]--;
+        if(mp[nums[last]] == 0) cnt--;
+        j++;
+        ans.push_back(cnt);
     }
     return ans;
 }
