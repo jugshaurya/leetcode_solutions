@@ -25,7 +25,7 @@ public:
     ListNode* getMiddle_minus1(ListNode* head){
         ListNode* slow = head;
         ListNode* fast = head->next->next;
-        while(fast and fast->next and fast->next->next){
+        while(fast and fast->next){
             slow = slow->next;
             fast = fast->next->next;
         }
@@ -40,6 +40,7 @@ public:
         ListNode* mid = getMiddle_minus1(head);
         ListNode* rightLL = mid->next->next;
         TreeNode* root = new TreeNode(mid->next->val);        
+        mid->next->next = NULL;
         mid->next = NULL;
         root->left = sortedListToBST(head);
         root->right = sortedListToBST(rightLL);
