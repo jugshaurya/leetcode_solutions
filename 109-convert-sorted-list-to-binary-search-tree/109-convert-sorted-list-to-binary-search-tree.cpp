@@ -39,11 +39,14 @@ public:
         
         ListNode* mid = getMiddle_minus1(head);
         ListNode* rightLL = mid->next->next;
+        ListNode* toBeRoot = mid->next;
         TreeNode* root = new TreeNode(mid->next->val);        
         mid->next->next = NULL;
         mid->next = NULL;
         root->left = sortedListToBST(head);
         root->right = sortedListToBST(rightLL);
+        mid->next = toBeRoot;
+        mid->next->next = rightLL;
         return root;
     }
     
