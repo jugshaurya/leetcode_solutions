@@ -1,16 +1,16 @@
 
 class MedianFinder {
 public:
+    
     priority_queue<int, vector<int>, greater<int>> pqmin;
     priority_queue<int> pqmax;
     
-    MedianFinder() {
-                
-    }
+    MedianFinder() {}
     
-    // shift elment from one heap to other if both heaps are not balanced.
+    // Logic: Shift elmenet from one heap to other if both heaps are not balanced.
     // i.e size difference is more than one => imbalance.
     void addNum(int num) {
+        
         if(pqmax.empty() and pqmin.empty()){
             pqmin.push(num);
             return;
@@ -42,15 +42,15 @@ public:
             return;
         } 
         
-        if(num > pqmax.top()) 
+        if(num > pqmax.top()) {
             pqmin.push(num);
-        else
+        } else {
             pqmax.push(num);
+        }
         
         int a = pqmax.size();
         int b = pqmin.size();
-        
-        if(abs(a-b) > 1) {
+        if(abs(a - b) > 1) {
             if(a > b){
                 int top = pqmax.top(); 
                 pqmax.pop();
@@ -66,12 +66,12 @@ public:
     double findMedian() {
         int a = pqmax.size();
         int b = pqmin.size();
+        
         if(a + b == 0) return 0;
         if(a + b == 1 and a == 1) return pqmax.top(); 
         if(a + b == 1 and b == 1) return pqmin.top(); 
         
-        int totalSize = a + b;
-        if(totalSize % 2 == 0) return (pqmax.top() + pqmin.top())/2.0; 
+        if((a + b) % 2 == 0) return (pqmax.top() + pqmin.top()) / 2.0; 
         return a > b ? pqmax.top(): pqmin.top();
     }
 };
