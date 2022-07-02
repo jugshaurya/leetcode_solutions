@@ -57,7 +57,6 @@
 
 
 // Method 1: using list from scratch
-// will give TLE.
 struct Node{
     int key;
     int value;
