@@ -15,10 +15,10 @@ public:
     TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder, int preS, int preE, int postS, int postE) {
         
         if(preS > preE) return NULL;
-        if(postS > postE) return NULL;
         if(preS == preE) return new TreeNode(preorder[preS]);
         
         TreeNode* root = new TreeNode(preorder[preS]);
+        
         // find the index of next element
         int index = postOrderMap[preorder[preS + 1]];
         int numberOfElementsInLeft = index - postS + 1;
