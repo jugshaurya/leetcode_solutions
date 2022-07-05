@@ -18,7 +18,9 @@ public:
     map<int, int> inorderMap;
     TreeNode* buildTreeHelper(vector<int>& preorder, vector<int>& inorder, int preS, int preE, int inS, int inE) {
         
-        if(preS > preE) return NULL;
+        // if(preS > preE) return NULL;
+        // both works, as equal in size.
+        if(inS > inE) return NULL;
         
         TreeNode* root = new TreeNode(preorder[preS]);
         // search in O(1) using map.
