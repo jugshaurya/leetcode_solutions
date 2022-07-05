@@ -129,45 +129,42 @@ struct Node
 //Function to return a list containing elements of left view of the binary tree.
 // Method1: using Level order traversal(BFS)
 
-vector<int> leftView(Node *root) {
-    if(root == NULL) return {};
+// vector<int> leftView(Node *root) {
+//     if(root == NULL) return {};
     
-    queue<Node*> q;
-    q.push(root);
+//     queue<Node*> q;
+//     q.push(root);
     
-    vector<int> ans;
-    while(!q.empty()){
-        int len = q.size();
-        ans.push_back(q.front()->data);
-        while(len--){
-            auto front = q.front(); q.pop();
-            if(front->left) q.push(front->left);
-            if(front->right) q.push(front->right);
-        }
-    }
+//     vector<int> ans;
+//     while(!q.empty()){
+//         int len = q.size();
+//         ans.push_back(q.front()->data);
+//         while(len--){
+//             auto front = q.front(); q.pop();
+//             if(front->left) q.push(front->left);
+//             if(front->right) q.push(front->right);
+//         }
+//     }
     
-    return ans;
-}
+//     return ans;
+// }
 
 // Method2: using Root, Right, Left Traversal (DFS)
-// class Solution {
-// public:
-//     void helper(Node* root, int& maxLevelSeenSoFar, int level, vector<int> &ans) {
-//         if(root == NULL) return;
-        
-//         if(level > maxLevelSeenSoFar) {
-//             ans.push_back(root->val);
-//             maxLevelSeenSoFar = level;
-//         };
-        
-//         helper(root->right, maxLevelSeenSoFar, level + 1, ans);
-//         helper(root->left, maxLevelSeenSoFar, level + 1, ans);
-//     }
+void helper(Node* root, int& maxLevelSeenSoFar, int level, vector<int> &ans) {
+    if(root == NULL) return;
+    
+    if(level > maxLevelSeenSoFar) {
+        ans.push_back(root->data);
+        maxLevelSeenSoFar = level;
+    };
+    
+    helper(root->left, maxLevelSeenSoFar, level + 1, ans);
+    helper(root->right, maxLevelSeenSoFar, level + 1, ans);
+}
 
-//     vector<int> rightSideView(TreeNode* root) {
-//         vector<int> ans;
-//         int maxLevelSeenSoFar = -1;
-//         helper(root, maxLevelSeenSoFar, 0, ans);
-//         return ans;
-//     }
-// };
+vector<int> leftView(Node *root) {
+    vector<int> ans;
+    int maxLevelSeenSoFar = -1;
+    helper(root, maxLevelSeenSoFar, 0, ans);
+    return ans;
+}
