@@ -40,16 +40,12 @@
 // Method 2
 class Solution {
 public:
-    
     bool isValidBSTHelper(TreeNode* root, long leftLimit = LONG_MIN, long rightLimit = LONG_MAX){
         if(root == NULL) return true;
-        
         if(root->val > leftLimit and root->val < rightLimit) {
             return isValidBSTHelper(root->left, leftLimit, root->val) and isValidBSTHelper(root->right, root->val, rightLimit);
         }
-        
         return false;
-        
     }
   
     bool isValidBST(TreeNode* root) {
