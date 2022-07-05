@@ -28,8 +28,8 @@ public:
         helper(root, 0, 0, mp);
         
         vector<vector<int>> ans;
-        for(auto &x: mp){
-            sort(x.second.begin(), x.second.end(), [&](pii a, pii b){
+        for(auto x: mp){
+            sort(x.second.begin(), x.second.end(), [](pii a, pii b){
                 if(a.second != b.second) return a.second < b.second;
                 return a.first < b.first;
             });
