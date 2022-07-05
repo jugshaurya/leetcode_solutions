@@ -20,6 +20,7 @@ class Solution {
 public:
     ReturnIsBST isValidBSTHelper(TreeNode* root){
       if(root == NULL) return {true, LONG_MIN, LONG_MAX};
+    
       ReturnIsBST leftAns = isValidBSTHelper(root->left);
       ReturnIsBST rightAns = isValidBSTHelper(root->right);
       
