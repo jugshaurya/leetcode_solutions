@@ -15,7 +15,7 @@ public:
     
     pair<int, int> helper(TreeNode* root) {
         
-        if(root == NULL) return {-1e9, -1e9};
+        if(root == NULL) return {-1001, -1001};
         
         auto leftAns = helper(root->left);
         auto rightAns = helper(root->right);
