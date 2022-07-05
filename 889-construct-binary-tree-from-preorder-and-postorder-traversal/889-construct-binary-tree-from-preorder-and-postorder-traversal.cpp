@@ -15,6 +15,8 @@ public:
     TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder, int preS, int preE, int postS, int postE) {
         
         if(preS > preE) return NULL;
+        
+        // because I am accessing [preS + 1]th index;
         if(preS == preE) return new TreeNode(preorder[preS]);
         
         TreeNode* root = new TreeNode(preorder[preS]);
