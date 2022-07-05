@@ -18,8 +18,8 @@ public:
             return;
         }
         
-        helper(root->left, path+to_string(root->val)+"->" , ans);
-        helper(root->right,path+to_string(root->val)+"->", ans);
+        helper(root->left, path + to_string(root->val) + "->" , ans);
+        helper(root->right, path + to_string(root->val) + "->", ans);
     }
     
     vector<string> binaryTreePaths(TreeNode* root) {
