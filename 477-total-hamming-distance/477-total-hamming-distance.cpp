@@ -8,10 +8,9 @@ public:
             int zeros = 0;
             int ones = 0;
             for(int j = 0; j < n; j++){
-                if((nums[j] & (1 << i)) == 0) ones++;
-                else zeros++;
+                if((nums[j] & (1 << i)) == 0) zeros++;
+                else ones++;
             }
-            cout<<ones<<" "<<zeros<<endl;
             ans += ones * zeros;
         }
                 
