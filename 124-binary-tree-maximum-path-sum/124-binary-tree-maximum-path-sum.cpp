@@ -11,18 +11,15 @@
  */
 class Solution {
 public:
-    
-    
     pair<int, int> helper(TreeNode* root) {
-        
         if(root == NULL) return {-1001, -1001};
         
         auto leftAns = helper(root->left);
         auto rightAns = helper(root->right);
         
-        int maxPossiblePathSum = max({root->val, leftAns.first, rightAns.first, leftAns.second + rightAns.second + root->val, rightAns.second + root->val, leftAns.second + root->val});
-        int maxSum = max({leftAns.second + root->val, rightAns.second + root->val, root->val});
-        return {maxPossiblePathSum, maxSum};
+        int possibleMaxSumPassingFromRoot = max({root->val, leftAns.first, rightAns.first, leftAns.second + rightAns.second + root->val, rightAns.second + root->val, leftAns.second + root->val});
+        int possibleMaxSumPassingContainingRoot = max({leftAns.second + root->val, rightAns.second + root->val, root->val});
+        return {possibleMaxSumPassingFromRoot, possibleMaxSumPassingContainingRoot};
         
     }
     
