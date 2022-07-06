@@ -15,14 +15,17 @@ class Solution{
         map<int, int> mp;
         mp[0] = 1;
         
+        int ans = 0;
         int sum = 0;
-        for(int i = 0; i<n;i++) {
+        for(int i= 0;i<n;i++) {
             sum += arr[i];
-            if(mp.count(sum)) return true;
+            if(mp.count(sum)) {
+                ans += mp[sum];
+            }
             mp[sum]++;
         }
         
-        return false;
+        return ans >= 1;
 
     }
 };
