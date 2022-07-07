@@ -1,5 +1,5 @@
 # Inorder Successor in BST
-## Easy 
+##  Easy 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a BST, and a reference to a Node x in the BST. Find the Inorder Successor of the given node in the BST.</span><br>
 &nbsp;</p>
