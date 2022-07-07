@@ -146,7 +146,7 @@ class Solution{
     Node* inOrderSuccessor(Node *root, Node *x) {
     //   return helper(root, x, new Node(-1));
         int prev = -1;
-        int ans = -1;
+        int ans;
         helper2(root, x, prev, ans);
         
         return new Node(ans);
