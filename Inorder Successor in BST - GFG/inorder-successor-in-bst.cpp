@@ -143,13 +143,44 @@ class Solution{
         helper2(root->left, x, prev, ans);   
     }
     
-    Node* inOrderSuccessor(Node *root, Node *x) {
-    //   return helper(root, x, new Node(-1));
-        int prev = -1;
-        int ans = -1;
-        helper2(root, x, prev, ans);
+    Node* helper3(Node *root, Node *x) {
         
-        return new Node(ans);
+        if(root==NULL) return new Node(-1);
+        
+        if(x->right != NULL){
+            Node* tmp = x->right;
+            while(tmp->left) tmp = tmp->left;
+            return tmp;
+        }
+        
+        Node* tmp = root;
+        int succ = NULL;
+        while(tmp != NULL and tmp!= x){
+            if(tmp->data < x->data) {
+              tmp  = tmp->right;
+            } else{
+              succ = tmp->data;
+              tmp  = tmp->left;
+            }
+        }
+        
+        if(tmp == NULL or succ == NULL) return new Node(-1);
+        return new Node(succ);
+    }
+    
+    Node* inOrderSuccessor(Node *root, Node *x) {
+        // Method 1
+        //  return helper(root, x, new Node(-1));
+        
+        // Method 2:
+        // int prev = -1;
+        // int ans = -1;
+        // helper2(root, x, prev, ans);
+        // return new Node(ans);
+        
+        // Method 3 , different implemetation of Method 1
+        return helper3(root, x);
+        
     }
 };
 
