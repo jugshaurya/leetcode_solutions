@@ -132,7 +132,6 @@ class Solution{
     
     Node* inOrderSuccessor(Node *root, Node *x) {
       Node* ans = helper(root, x, new Node(-1));
-      if(ans == x) return new Node(-1);
       return ans;
     }
 };
