@@ -131,8 +131,25 @@ class Solution{
       return helper(root->right, x, inorderSuccessorNode);
     }
     
+    // using reverse inorder
+    void helper2(Node *root, Node *x, int& prev, int& ans) {
+        if(root == NULL) return;
+        helper2(root->right, x, prev, ans);
+        if(root->data == x->data) {
+            ans = prev; 
+            return;
+        }
+        prev = root->data;
+        helper2(root->left, x, prev, ans);   
+    }
+    
     Node* inOrderSuccessor(Node *root, Node *x) {
-      return helper(root, x, new Node(-1));
+    //   return helper(root, x, new Node(-1));
+        int prev = -1;
+        int ans = -1;
+        helper2(root, x, prev, ans);
+        
+        return new Node(ans);
     }
 };
 
