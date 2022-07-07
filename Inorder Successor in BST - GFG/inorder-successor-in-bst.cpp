@@ -115,8 +115,9 @@ class Solution{
     
       if(root == NULL) return NULL;
     
-      if(root->data == x->data){
-        if(root->right == NULL) return inorderSuccessorNode;
+      if(root->data == x->data and root->right == NULL) return inorderSuccessorNode; 
+      
+      if(root->data == x->data) {
         Node* tmp = root->right;
         while(tmp->left != NULL) tmp = tmp->left;
         return tmp;
@@ -131,8 +132,7 @@ class Solution{
     }
     
     Node* inOrderSuccessor(Node *root, Node *x) {
-      Node* ans = helper(root, x, new Node(-1));
-      return ans;
+      return helper(root, x, new Node(-1));
     }
 };
 
