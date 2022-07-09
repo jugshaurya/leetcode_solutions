@@ -14,17 +14,15 @@ public:
     TreeNode* pruneTree(TreeNode* root) {
         if(root == NULL) return NULL;
         
-        TreeNode* left = pruneTree(root->left);
-        TreeNode* right = pruneTree(root->right);
-        root->left = left;
-        root->right = right;
+        root->left = pruneTree(root->left);
+        root->right = pruneTree(root->right);
         
-        if(left == NULL and right == NULL and root->val == 0){
+        if(root->left == NULL and root->right == NULL and root->val == 0){
             delete root;
             return NULL;
         }
         
-        if(left == NULL and right == NULL and root->val == 1){
+        if(root->left == NULL and root->right == NULL and root->val == 1){
             return root;
         }
         
