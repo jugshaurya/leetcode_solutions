@@ -10,7 +10,9 @@
  * };
  */
 
-// Method 1: using extra four variable
+// Method 1: using extra five variable
+// int currentLevel, int& px, int& py, int& lx, int& ly
+// Method 2: using queue  + above five variable.
 class Solution {
 public:
     
