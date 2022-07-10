@@ -11,16 +11,16 @@
  */
 class Solution {
 public:
+    
     pair<int, int> helper(TreeNode* root) {
         if(root == NULL) return {-1001, -1001};
         
         auto leftAns = helper(root->left);
         auto rightAns = helper(root->right);
         
-        int possibleMaxSumPassingFromRoot = max({root->val, leftAns.first, rightAns.first, leftAns.second + rightAns.second + root->val, rightAns.second + root->val, leftAns.second + root->val});
-        int possibleMaxSumPassingContainingRoot = max({leftAns.second + root->val, rightAns.second + root->val, root->val});
-        return {possibleMaxSumPassingFromRoot, possibleMaxSumPassingContainingRoot};
-        
+        int a = max({leftAns.first, rightAns.first, root->val, leftAns.second + root->val, rightAns.second + root->val, leftAns.second + root->val+ rightAns.second});
+        int b = max({root->val, leftAns.second + root->val, rightAns.second + root->val});
+        return {a, b};
     }
     
     int maxPathSum(TreeNode* root) {
