@@ -9,47 +9,55 @@
  */
 class Solution {
 public:
-    void fillAtlevelK(TreeNode* root,int k, vector<int> &ans, string dir, int firstTime=1){
-        if(root==NULL) return;
-        if(k==0) ans.push_back(root->val);
-        if(firstTime) {
-            if(dir == "L"){
-                fillAtlevelK(root->left, k-1, ans, dir, 0);
-            }else{
-                fillAtlevelK(root->right, k-1, ans, dir, 0);
-            }
-        }else{
-            fillAtlevelK(root->left, k-1, ans, dir, 0);
-            fillAtlevelK(root->right, k-1, ans, dir, 0);
+    
+    void fillNodesAtKLevelBelow(TreeNode* root, int k, vector<int> &ans){
+        
+        if(root == NULL) return;
+        if(k == 0){
+            ans.push_back(root->val);
+            return;
         }
+        
+        fillNodesAtKLevelBelow(root->left, k-1, ans);
+        fillNodesAtKLevelBelow(root->right, k-1, ans);
     }
     
-    int distanceK(TreeNode* root, TreeNode* target, int k, vector<int> &ans) {
+    int helper(TreeNode* root, TreeNode* target, int k, vector<int> &ans) {
+        
         if(root == NULL) return -1;
-        if(root == target) {
-            fillAtlevelK(root, k, ans, "L", 0);
+        if(root == target){
+            fillNodesAtKLevelBelow(root, k, ans);
             return 0;
         }
         
-        int ldis = distanceK(root->left, target, k, ans);
-        if(ldis != -1) {
-            fillAtlevelK(root , k-ldis-1, ans, "R");
-            return 1+ldis;        
+        int leftAns = helper(root->left, target, k, ans);
+        if(leftAns != -1){
+            int rootDistanceFromTarget = leftAns + 1;
+            if(rootDistanceFromTarget == k) {
+                ans.push_back(root->val);
+            }else{
+                fillNodesAtKLevelBelow(root->right, k - rootDistanceFromTarget - 1, ans);
+            }
+            return rootDistanceFromTarget;
         }
         
-        int rdis = distanceK(root->right, target, k,ans);
-           if(rdis != -1) {
-            fillAtlevelK(root , k-rdis-1, ans, "L");
-            return 1+rdis;        
+        int rightAns = helper(root->right, target, k, ans);
+        if(rightAns != -1){
+            int rootDistanceFromTarget = rightAns + 1;
+            if(rootDistanceFromTarget == k) {
+                ans.push_back(root->val);
+            }else{
+                fillNodesAtKLevelBelow(root->left, k - rootDistanceFromTarget - 1, ans);
+            }
+            return rootDistanceFromTarget;
         }
-
+        
         return -1;
     }
     
-    vector<int> distanceK(TreeNode* root, TreeNode* target, int k){
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
         vector<int> ans;
-        distanceK(root, target, k, ans);
+        helper(root, target, k, ans);
         return ans;
-        
     }
 };
