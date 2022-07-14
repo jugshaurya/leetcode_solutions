@@ -12,6 +12,6 @@ public:
             ans += to_string(x);
         }
         
-        return ans[0]=='0' ? "0" : ans;
+        return ans[0] == '0' ? "0" : ans;
     }
 };
