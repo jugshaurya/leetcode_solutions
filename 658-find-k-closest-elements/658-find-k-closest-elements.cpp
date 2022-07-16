@@ -6,6 +6,7 @@ class Solution {
         auto it = lower_bound(arr.begin(), arr.end(), x);
         int n = arr.size();
 
+        // O(k)
         vector<int> ans;
         int i, j;
         if (it == arr.end()) {
