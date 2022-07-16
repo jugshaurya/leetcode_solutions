@@ -8,8 +8,9 @@ public:
         }
         
         for(int i=0; i<n; i++) {
-            if(abs(nums[i])>=1 and abs(nums[i])<=n) {
-                nums[abs(nums[i]) - 1] = -(abs(nums[abs(nums[i]) - 1]));
+            int toUpdateIndex = abs(nums[i]);
+            if(toUpdateIndex>=1 and toUpdateIndex<=n) {
+                nums[toUpdateIndex - 1] = -(abs(nums[toUpdateIndex - 1]));
             }
         }
         
