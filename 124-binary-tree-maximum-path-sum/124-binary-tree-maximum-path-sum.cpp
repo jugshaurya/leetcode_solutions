@@ -9,21 +9,28 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+struct Pair{
+    int a; // maxPathSum;
+    int b; // maxLinePathSum;
+};
+
 class Solution {
 public:
     
-    pair<int, int> helper(TreeNode* root) {
+    Pair helper(TreeNode* root) {
         if(root == NULL) return {-1001, -1001};
         
-        auto leftAns = helper(root->left);
-        auto rightAns = helper(root->right);
+        Pair l = helper(root->left);
+        Pair r = helper(root->right);
         
-        int a = max({leftAns.first, rightAns.first, root->val, leftAns.second + root->val, rightAns.second + root->val, leftAns.second + root->val+ rightAns.second});
-        int b = max({root->val, leftAns.second + root->val, rightAns.second + root->val});
-        return {a, b};
+        int maxPathSum = max({l.a, r.a, root->val, root->val + l.b, root->val + r.b , root->val + l.b + r.b});
+        int maxLineSum = max({root->val, root->val + l.b, root->val + r.b});
+        
+        return {maxPathSum, maxLineSum};
     }
     
     int maxPathSum(TreeNode* root) {
-        return helper(root).first;
+        return helper(root).a;
     }
 };
