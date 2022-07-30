@@ -6,8 +6,6 @@ public:
         int n = word1.size();
         int m = word2.size();
         
-        if(n == 0) return m;
-        if(m == 0) return n;
         if(i == n) return m - j;
         if(j == m) return n - i;
         
