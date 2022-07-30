@@ -9,9 +9,12 @@ public:
         if(i == n) return m - j;
         if(j == m) return n - i;
         
-        if(memo[i][j] != -1) return memo[i][j];
+        if(memo[i][j] != -1) 
+            return memo[i][j];
         
-        if(word1[i] == word2[j]) return memo[i][j] = recurse(i+1, j+1, word1, word2);
+        if(word1[i] == word2[j]) 
+            return memo[i][j] = recurse(i+1, j+1, word1, word2);
+        
         return memo[i][j] = 1 + min({
             recurse(i, j+1, word1, word2),
             recurse(i+1, j, word1, word2),
