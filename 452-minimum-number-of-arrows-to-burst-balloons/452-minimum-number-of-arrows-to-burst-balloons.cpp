@@ -1,3 +1,4 @@
+// sorting by x-end
 class Solution {
 public:
     int findMinArrowShots(vector<vector<int>>& points) {
@@ -20,6 +21,7 @@ public:
     }
 };
 
+// sorting by x-start
 // class Solution {
 // public:
 //     int findMinArrowShots(vector<vector<int>>& points) {
