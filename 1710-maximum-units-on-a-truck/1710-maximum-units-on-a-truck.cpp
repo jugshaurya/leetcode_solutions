@@ -7,15 +7,10 @@ public:
         
         int ans = 0;
         for(auto x: boxTypes){
-            if(truckSize){
-                if(x[0] > truckSize){
-                    ans += x[1]*truckSize;
-                    truckSize = 0;
-                }else{
-                    truckSize -= x[0];
-                    ans += x[1]*x[0];
-                }
-            }else break;
+            if(truckSize == 0) break;
+            int boxesToBePutInTruck = min(truckSize, x[0]);
+            ans += x[1] * boxesToBePutInTruck;
+            truckSize -= boxesToBePutInTruck;
         }
         
         return ans;
