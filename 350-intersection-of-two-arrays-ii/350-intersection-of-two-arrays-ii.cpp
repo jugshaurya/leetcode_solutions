@@ -7,10 +7,10 @@ public:
         
         vector<int> ans;
         for(auto x: nums2) {
-            if(mp.count(x) == 0) continue;
-            if(mp[x] == 0) continue;
-            ans.push_back(x);
-            mp[x]--;
+            if(mp.count(x) and mp[x]!=0){
+                ans.push_back(x);
+                mp[x]--;
+            }
         }
         
         return ans;
