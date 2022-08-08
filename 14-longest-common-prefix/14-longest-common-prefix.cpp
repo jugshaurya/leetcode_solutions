@@ -6,10 +6,10 @@
 // Using Trie
 struct TrieNode{
     vector<TrieNode*> dict;
-    string val;
-    
+    bool isTerminal;
     TrieNode() {
         dict = vector<TrieNode*>(26, NULL);
+        isTerminal = false;
     }
 };
 
@@ -34,7 +34,7 @@ struct Trie {
         }
         
         // denoting the terminal, if val is not empty.
-        cur->val = word;
+        cur->isTerminal = true;
     }
     
     string LCP(){
@@ -53,7 +53,7 @@ struct Trie {
                 i++;
             }
             
-            if(cnt != 1 or cur->val!="") return ans;
+            if(cnt != 1 or cur->isTerminal) return ans;
             // => cnt is 1 and cur is non terminal
             ans += (digit + 'a');
             cur = cur->dict[digit];
@@ -68,12 +68,7 @@ class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) {
         Trie t;
-        
-        for(auto x: strs) {
-            if(x.empty()) return "";
-            t.insertWord(x);
-        }
-        
+        for(auto x: strs) t.insertWord(x);
         return t.LCP();
     }
 };
