@@ -25,7 +25,6 @@ public:
             subans.push_back(key);
             helper(subans, mp);
             subans.pop_back();
-            mp[key] += 1;
             
             mp.erase(key);
             helper(subans, mp);
