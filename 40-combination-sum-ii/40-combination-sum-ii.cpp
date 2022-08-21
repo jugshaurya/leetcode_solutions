@@ -14,24 +14,15 @@ public:
         
         auto [el, freq] = *mp.begin();    
         
-        if(freq == 1) {
-            mp.erase(el);
-            helper(target, tmp, mp);
-            
-            tmp.push_back(el);
-            helper(target - el, tmp, mp);
-            tmp.pop_back();
-            mp[el] = freq;
-        }else {
-            mp.erase(el);
-            helper(target, tmp, mp);
-            
-            mp[el] = freq - 1;
-            tmp.push_back(el);
-            helper(target - el, tmp, mp);
-            tmp.pop_back();
-            mp[el] = freq;
-        }
+        mp.erase(el);
+        helper(target, tmp, mp);
+
+        if(freq != 1) mp[el] = freq - 1;
+        
+        tmp.push_back(el);
+        helper(target - el, tmp, mp);
+        tmp.pop_back();
+        mp[el] = freq;
     }
     
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
@@ -39,7 +30,6 @@ public:
         
         map<int, int> mp;
         for(auto x: arr) mp[x]++;
-        
         vector<int> tmp;
         helper(target, tmp, mp);
         return ans;
