@@ -37,7 +37,6 @@ public:
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
         arr = candidates;
         
-        sort(arr.begin(), arr.end());
         map<int, int> mp;
         for(auto x: arr) mp[x]++;
         
