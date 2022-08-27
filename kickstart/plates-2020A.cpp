@@ -53,7 +53,7 @@ void pre() {}
 
 int n, k;
 int beauty[51][31];
-int dp[51][31];
+int dp[51][31*51];
 
 int rec(int i, int p){
 	if(i == n){
@@ -92,7 +92,7 @@ void solve() {
 // clang-format off
 signed main() {
 	FASTIO;
-	IO();
+// 	IO();
 	pre();
 	int _t; cin>>_t; for(int i=1;i<=_t;i++)
 	google(i), 
