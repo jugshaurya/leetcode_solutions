@@ -1,3 +1,7 @@
+// Can be think of LR Dp
+// but R is not changing
+
+// So can be think in terms of Form 2 DP, DP(ending at i).
 class Solution {
 public:
     int k;
