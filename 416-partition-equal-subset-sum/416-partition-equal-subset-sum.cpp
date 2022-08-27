@@ -1,24 +1,29 @@
 class Solution {
   public:
-  int memo[201][20005];
-  
-  bool helper(vector<int> &A, int i, int sum, int B) {
-    int n = A.size();
-    if (i == n and sum == B) return true;
-    if (i == n) return false;
-    if (memo[i][sum] != -1) return memo[i][sum];
-    return memo[i][sum] = helper(A, i + 1, sum + A[i], B) or helper(A, i + 1, sum, B);
-  }
+  int dp[201][20005];
+  vector<int> arr;
 
-  // DP Form: dp(i,sum)
-  bool subsetSum(vector<int> &A, int B) {
-    memset(memo, -1, sizeof(memo));
-    return helper(A, 0, 0, B);
+  bool rec(int i, int sum) {
+    int n = arr.size();
+      
+    if (i == n and sum == 0) return true;
+    if (i == n and sum != 0) return false;
+
+    if (dp[i][sum] != -1) return dp[i][sum];
+
+    int ans = rec(i + 1, sum);
+    if(sum - arr[i] >= 0) ans = ans or rec(i + 1, sum - arr[i]);
+    return dp[i][sum] = ans;
   }
 
   bool canPartition(vector<int> &nums) {
+    this->arr = nums;
+
     int total = accumulate(nums.begin(), nums.end(), 0);
     if (total & 1) return false;
-    return subsetSum(nums, total / 2);
+      
+    memset(dp, -1, sizeof(dp));
+    return rec(0, total / 2);
   }
+
 };
