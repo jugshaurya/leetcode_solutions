@@ -14,10 +14,10 @@ public:
         f[2] = g[2] = 2;
         
         for(int i = 3; i <= n; i++){
-            f[i] = f[i - 1] + f[i - 2] + 2 * g[i - 2];
-            f[i] %= M;
             g[i] = f[i - 1] + g[i - 1];
             g[i] %= M;
+            f[i] = f[i - 1] + f[i - 2] + 2 * g[i - 2];
+            f[i] %= M;
         }
         
         return f[n];
