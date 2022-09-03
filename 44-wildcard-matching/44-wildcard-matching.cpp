@@ -5,6 +5,7 @@ public:
     string a;
     string b;
     vector<vector<int>> dp;
+    // int dp[2001][2001];
     
     bool helper(int i,  int j){
         if(i == n and j == m) return true;
@@ -34,7 +35,8 @@ public:
         b = p;
         n = a.size();
         m = b.size();
-        dp.resize(n+1, vector<int>(m+1, -1));
+        dp.resize(n + 1, vector<int>(m + 1, -1));
+        // dp global array is not working in this question. 
         // memset(dp, -1, sizeof(dp));
         return helper(0, 0);   
     }
