@@ -1,35 +1,46 @@
 class Solution {
   public:
-  int memo[1005][1005];
-  int LCS(string &a, string &b, int i = 0, int j = 0) {
-    int A = a.size();
-    int B = b.size();
-      
-    if (i == A) return 0;
-    if (j == B) return 0;
-      
-    if (memo[i][j] != -1) return memo[i][j];
-    
-    if (a[i] == b[j]) return memo[i][j] = 1 + LCS(a, b, i + 1, j + 1);
-    return memo[i][j] = max(LCS(a, b, i + 1, j), LCS(a, b, i, j + 1));
+  int dp[1005][1005];
+  string a;
+  string b;
+  int n = a.size();
+  int m = b.size();
+
+  int rec(int i, int j) {
+    if (i == n) return 0;
+    if (j == m) return 0;
+
+    if (dp[i][j] != -1) return dp[i][j];
+
+    int ans = 0;
+    if (a[i] == b[j]) ans = 1 + rec(i + 1, j + 1);
+    else ans = max(rec(i + 1, j), rec(i, j + 1));
+
+    return dp[i][j] = ans;
   }
 
-  int LCSIterative(string &a, string &b) {
-    int n = a.length();
-    int m = b.length();
+  int LCSIterative() {
+    int dp[n + 1][m + 1];
+    for (int i = 0; i <= n; i++) {
+        for (int j = 0; j <= m; j++) {
+            if (i == 0 or j == 0) dp[i][j] = 0;
+            else if(a[i - 1] == b[j - 1]) dp[i][j] = 1 + dp[i - 1][j - 1];
+            else dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]);
+        }
+    }
 
-    vector<vector<int> > memo(n + 1, vector<int>(m + 1, 0));
-      
-    for (int i = 1; i <= n; i++)
-        for (int j = 1; j <= m; j++)
-            if (a[i - 1] == b[j - 1]) memo[i][j] = 1 + memo[i - 1][j - 1];
-            else memo[i][j] = max(memo[i][j - 1], memo[i - 1][j]);
-      
-    return memo[n][m];
+    return dp[n][m];
   }
 
   int longestCommonSubsequence(string text1, string text2) {
-    memset(memo, -1, sizeof(memo));
-    return LCSIterative(text1, text2);
+    memset(dp, -1, sizeof(dp));
+    a = text1;
+    n = text1.size();
+    b = text2;
+    m = text2.size();
+
+    // return rec(0, 0);
+    return LCSIterative();
   }
 };
+
