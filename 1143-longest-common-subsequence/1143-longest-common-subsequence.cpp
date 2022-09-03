@@ -39,8 +39,8 @@ class Solution {
     b = text2;
     m = text2.size();
 
-    // return rec(0, 0);
-    return LCSIterative();
+    return rec(0, 0);
+    // return LCSIterative();
   }
 };
 
