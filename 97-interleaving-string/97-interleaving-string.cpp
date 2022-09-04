@@ -9,8 +9,8 @@ public:
         
         if(dp[i][j][k] != -1) return dp[i][j][k];
         int ans = false;
-        if(j < m and c[k] == b[j]) ans |= rec(i, j + 1, k + 1);
-        if(i < n and c[k] == a[i]) ans |= rec(i + 1, j, k + 1);
+        if(c[k] == b[j]) ans |= rec(i, j + 1, k + 1);
+        if(c[k] == a[i]) ans |= rec(i + 1, j, k + 1);
         return dp[i][j][k] = ans;
     }
     
