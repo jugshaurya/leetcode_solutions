@@ -10,15 +10,15 @@ public:
         int l = c.size();
         
         if(n + m != l) return false;
-        int dp[n + 1][m + 1];
-        for(int i = n; i >= 0; i--){
-            for(int j = m; j >= 0; j--){
+        int dp[2][m + 1];
+        for(int i = n; i >= 0; i--) {
+            for(int j = m; j >= 0; j--) {
                 int k = i + j;
-                if(i + j == l and k == l) dp[i][j] = true;
+                if(i + j == l and k == l) dp[i&1][j] = true;
                 else {
-                    dp[i][j] = false;
-                    if(c[k] == b[j]) dp[i][j] |= dp[i][j + 1];
-                    if(c[k] == a[i]) dp[i][j] |= dp[i + 1][j];
+                    dp[i&1][j] = false;
+                    if(c[k] == b[j]) dp[i&1][j] |= dp[i&1][j + 1];
+                    if(c[k] == a[i]) dp[i&1][j] |= dp[(i + 1)&1][j];
                 }
             }
         }
