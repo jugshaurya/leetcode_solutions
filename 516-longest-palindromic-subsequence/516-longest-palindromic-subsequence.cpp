@@ -1,20 +1,26 @@
-vector<vector<int>> memo;
+
 class Solution {
     public:
-    int helper(string &s, int i, int j) {
+    int dp[1001][1001];
+    string s;
+    
+    int rec(int i, int j) {
         if (i > j) return 0;
         if (i == j) return 1;
+
+        if (dp[i][j] != -1) return dp[i][j];
         
-        if (memo[i][j] != -1) return memo[i][j];
+        int ans = 0;
+        if (s[i] == s[j]) ans = 2 + rec(i + 1, j - 1);
+        else ans = max(rec(i, j - 1), rec(i + 1, j));
         
-        if (s[i] == s[j]) return memo[i][j] = 2 + helper(s, i + 1, j - 1);
-        return memo[i][j] = max(helper(s, i, j - 1), helper(s, i + 1, j));
+        return dp[i][j] = ans;
     }
 
     int longestPalindromeSubseq(string s) {
-        int n = s.length();
-        memo = vector<vector<int>> (n + 1, vector<int>(n + 1, -1));
-        int ans = helper(s, 0, s.size() - 1);
-        return ans;
+        this->s = s;
+        memset(dp, -1, sizeof(dp));
+        int n = s.size();
+        return rec(0, n - 1);
     }
 };
