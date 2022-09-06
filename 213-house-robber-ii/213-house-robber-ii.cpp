@@ -19,14 +19,8 @@ public:
         int n = nums.size();
 
         if(n == 1) return nums[0];
-        if(n == 2) return max(nums[0], nums[1]);
-        if(n == 3) return max({nums[0], nums[1], nums[2]});
-        
         // Case 1: assuming house 0 will always never be in answer.
-        int opt1 = rob1(1, n - 1);
-        
         // Case 2: assuming house (n-1) will never be in answer.
-        int opt2 = rob1(0, n - 2);
-        return max(opt1,opt2);
+        return max(rob1(1, n - 1), rob1(0, n - 2));
     }
 };
