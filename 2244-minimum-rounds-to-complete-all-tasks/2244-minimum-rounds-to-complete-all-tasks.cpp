@@ -1,48 +1,31 @@
-vector<int> dp;
+// Method 1: hashmap + DP 
 class Solution {
   public:
-  int minRoundsNeeded(int n) {
-    if (n < 2) return 1e9;
-    if (n == 2) return 1;
-    if (n == 3) return 1;
-    if (dp[n] != -1) return dp[n];
-    return dp[n] = 1 + min(minRoundsNeeded(n - 2), minRoundsNeeded(n - 3));
-  }
-
-  int minimumRounds(vector<int>& tasks) {
-    // Method 1: using sorting + DP (nlogn + n) 
-    // int n = tasks.size();
-
-    // sort(tasks.begin(), tasks.end());
-    // dp = vector<int>(n + 1, -1);
-
-    // int ans = 0;
-    // int cnt = 1;
-    // for (int i = 1; i < n; i++) {
-    //   if (tasks[i] == tasks[i - 1]) cnt++;
-    //   else {
-    //     if (cnt == 1) return -1;
-    //     ans += minRoundsNeeded(cnt);
-    //     cnt = 1;
-    //   }
-    // }
-
-    // if (cnt == 1) return -1;
-    // ans += minRoundsNeeded(cnt);
-    // return ans;
-
-    // Method 2: using Hashing + DP =  O(n)
-    
-    int n = tasks.size();
-    unordered_map<int, int> m;
-    for (int i = 0; i < n; i++) m[tasks[i]]++;
-
-    dp = vector<int>(n + 1, -1);
-    int ans = 0;
-    for (auto [task, freq] : m) {
-      if (freq == 1) return -1;
-      ans += minRoundsNeeded(freq);
+    int dp[100005];
+    int rec(int n) {
+        if(n < 2) return 1e9; 
+        if(n == 2 or n == 3) return 1;
+        
+        if (dp[n] != -1) return dp[n];
+        
+        return dp[n] = 1 + min(rec(n - 2), rec(n - 3));
     }
-    return ans;
-  }
+
+
+    int minimumRounds(vector<int>& tasks) {
+        int n = tasks.size();
+
+        unordered_map<int, int> mp;
+        for (auto x: tasks) mp[x]++;
+
+        memset(dp, -1, sizeof(dp));
+
+        int ans = 0;
+        for (auto [task, freq] : mp) {
+            if (freq == 1) return -1;
+            else ans += rec(freq);
+        }
+
+        return ans;
+    }
 };
