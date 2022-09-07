@@ -1,33 +1,29 @@
 class Solution {
 public:
-    
-    int helper(string& word1, string& word2,int i, int j){
-        int n = word1.size();
-        int m = word2.size();
-        
-        if(i == n) return m - j;
-        if(j == m) return n - i;
-
-        if(word1[i] == word2[j]) return helper(word1, word2, i+1, j+1);
-        return 1 + min(helper(word1, word2, i+1, j), helper(word1, word2, i, j+1));
-    }   
-    
+    string a, b;
+    int n, m;
     int dp[505][505];
-    int helperDP(string& word1, string& word2,int i, int j){
-        int n = word1.size();
-        int m = word2.size();
+    
+    int rec(int i, int j){
         
         if(i == n) return m - j;
         if(j == m) return n - i;
         
         if(dp[i][j]!=-1) return dp[i][j];
         
-        if(word1[i] == word2[j]) return dp[i][j] = helperDP(word1, word2, i+1, j+1);
-        return dp[i][j] = 1 + min(helperDP(word1, word2, i+1, j), helperDP(word1, word2, i, j+1));
+        int ans = 0;
+        if(a[i] == b[j]) ans = rec(i + 1, j + 1);
+        else ans = 1 + min(rec(i + 1, j), rec(i, j + 1));
+        return dp[i][j] = ans;
     }
     
     int minDistance(string word1, string word2) {
+        a = word1;
+        b = word2;
+        n = word1.size();
+        m = word2.size();
+        
         memset(dp, -1, sizeof(dp));
-        return helperDP(word1, word2, 0, 0);        
+        return rec(0, 0);        
     }
 };
