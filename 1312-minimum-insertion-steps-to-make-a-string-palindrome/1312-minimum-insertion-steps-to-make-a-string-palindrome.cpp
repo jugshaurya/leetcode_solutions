@@ -1,52 +1,56 @@
-vector<vector<int>> memo;
-
-class Solution {
-public:
+// Method2: Direct dp(i, j)
+// clas Solution {
+// public: 
+//     string s;
+//     int dp[505][505];
     
-// ================== Method 1: #insertions = #deletions = n - LPS(s) ==========================
-    
-//     int LPSHelper(string &s, int i, int j) {
+//     int rec(int i, int j) {
 //         if (i > j) return 0;
-//         if (i == j) return 1;
-        
-//         if (memo[i][j] != -1) return memo[i][j];
-        
-//         if (s[i] == s[j]) return memo[i][j] = 2 + LPSHelper(s, i + 1, j - 1);
-//         return memo[i][j] = max(LPSHelper(s, i, j - 1), LPSHelper(s, i + 1, j));
-//     }
+//         if (i == j) return 0;
 
-//     int LPS(string s) {
-//         int n = s.length();
-//         memo = vector<vector<int>> (n + 1, vector<int>(n + 1, -1));
-//         int ans = LPSHelper(s, 0, s.size() - 1);
-//         return ans;
+//         if (dp[i][j] != -1) return dp[i][j];
+        
+//         int ans = 0;
+//         if (s[i] == s[j]) ans = rec(i + 1, j - 1);
+//         else ans = 1 + min(rec(i, j - 1), rec(i + 1, j));
+//         return dp[i][j] = ans;
 //     }
     
 //     int minInsertions(string s) {
-//         return s.size() - LPS(s);
+//         this->s = s;
+
+//         memset(dp, -1, sizeof(dp));
+//         int n = s.size();
+//         return rec(0, n - 1);
 //     }
-    
-    
-// ================== Method2: direct dp(i,j) ==========================
-    int rec(string &s, int i, int j) {
+// }
+
+// Method 1: #insertions = #deletions = n - LPS(s)
+class Solution {
+public:
+    string s;
+    int dp[505][505];
+
+    int rec(int i, int j) {
         if (i > j) return 0;
-        if (i == j) return 0;
+        if (i == j) return 1;
         
-        if (memo[i][j] != -1) return memo[i][j];
+        if (dp[i][j] != -1) return dp[i][j];
         
-        if (s[i] == s[j]) return memo[i][j] = rec(s, i + 1, j - 1);
-        return memo[i][j] = 1 + min(rec(s, i, j - 1), rec(s, i + 1, j));
+        int ans = 0 ;
+        if (s[i] == s[j]) ans = 2 + rec(i + 1, j - 1);
+        else ans = max(rec(i, j - 1), rec(i + 1, j));
+            
+        
+        return dp[i][j] = ans;
     }
 
-    int helper(string s) {
-        int n = s.length();
-        memo = vector<vector<int>> (n + 1, vector<int>(n + 1, -1));
-        return rec(s, 0, s.size() - 1);
-    }
-    
     int minInsertions(string s) {
-        // Method 2: #insertions = #deletions = n - LPS(s)
-        return helper(s);
+        this->s = s;
+
+        memset(dp, -1, sizeof(dp));
+        int n = s.size();
+        return n - rec(0, n - 1);
     }
 };
 
