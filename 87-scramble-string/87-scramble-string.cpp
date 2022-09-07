@@ -33,7 +33,7 @@ class Solution {
         
         if(n != m) assert("Invalid Input");
         
-        memset(dp,-1,sizeof(dp));
+        memset(dp, -1, sizeof(dp));
         return rec(0, n - 1, 0);
     }
 };
