@@ -1,6 +1,8 @@
+// Time: O(n^2)
+// Space: O(n^2)
 class Solution {
 public:
-    
+
     string s;
     int n;
     int dp[2001][2001];
