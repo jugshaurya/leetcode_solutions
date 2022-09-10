@@ -50,24 +50,11 @@ int rec(int i, int j, int k) {
   int ans = 0;
   if(a[i] == b[j] and b[j] == c[k]) ans = max(ans, 1 + rec(i + 1, j + 1, k + 1));
 	else{
-        
-    ans = max(ans, rec(i + 1, j, k)); if (i == n or j == m or k == o) return 0;
-
-  if(dp[i][j][k] != -1) return dp[i][j][k];
-
-  int ans = 0;
-  if(a[i] == b[j] and b[j] == c[k]) ans = max(ans, 1 + rec(i + 1, j + 1, k + 1));
-	else{
-        
-    ans = max(ans, rec(i + 1, j, k));
+      ans = max(ans, rec(i + 1, j, k));
       ans = max(ans, rec(i, j + 1, k));
       ans = max(ans, rec(i, j, k + 1));
     }
-  return dp[i][j][k] = ans;
 
-      ans = max(ans, rec(i, j + 1, k));
-      ans = max(ans, rec(i, j, k + 1));
-    }
   return dp[i][j][k] = ans;
 }
 
