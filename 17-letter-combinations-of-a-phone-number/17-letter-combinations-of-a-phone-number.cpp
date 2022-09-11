@@ -1,31 +1,33 @@
-vector<string> dict = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
 class Solution {
   public:
-  vector<string> letterCombinations(string digits) {
+    vector<string> dict = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
     vector<string> ans;
-    int n = digits.size();
-      
-    if (n == 0) return ans;
+    int n;
+    string s;
     
-    if (n == 1) {
-      for (auto x : dict[digits[0] - '0']) {
-        string tmp = "";
-        tmp += x;
-        ans.push_back(tmp);
-      }
-      return ans;
+    void rec(int i, string& tmp){
+        if (i == n) {
+            ans.push_back(tmp);
+            return;
+        }
+        
+        for (auto x : dict[s[i] - '0']){
+            tmp += x;
+            rec(i + 1, tmp);
+            tmp.pop_back();
+        }
     }
-      
-    vector<string> subans = letterCombinations(digits.substr(1));
-    for (auto x : dict[digits[0] - '0']) {
-      for (auto y : subans) {
+    
+    vector<string> letterCombinations(string digits) {
+        this->s = digits;
+        this->n = digits.size();
+        
+        if(n == 0) return {};
+        
         string tmp;
-        tmp += x;
-        tmp += y;
-        ans.push_back(tmp);
-      }
+        rec(0, tmp);
+    
+        return ans;
     }
-
-    return ans;
-  }
 };
