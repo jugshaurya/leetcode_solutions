@@ -5,14 +5,14 @@ public:
     set<string> st;
     string s;
     int n;
-    // map<int, vector<string>> mp;
+    map<int, vector<string>> mp;
     
     vector<string> rec(int i) {
         if(i == n) {
             return {""};
         }
         
-        // if(mp.count(i)) return mp[i];
+        if(mp.count(i)) return mp[i];
         
         vector<string> ans;
         for(int j = i; j < n; j++) {
@@ -29,7 +29,7 @@ public:
             }    
         }
         
-        return ans;
+        return mp[i] = ans;
     }    
     
     vector<string> wordBreak(string s, vector<string>& wordDict) {
