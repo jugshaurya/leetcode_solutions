@@ -1,4 +1,4 @@
-// can use trie as well
+// Note: Can use trie as well, but using set for now.
 class Solution {
 public:
     set<string> st;
@@ -16,7 +16,6 @@ public:
                 if(rec(j + 1)) return dp[i] = true;
             }
         }
-        
         return dp[i] = false;
     }
     
@@ -27,6 +26,5 @@ public:
         
         memset(dp, -1, sizeof(dp));
         return rec(0);
-        
     }
 };
