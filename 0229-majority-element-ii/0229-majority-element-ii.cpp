@@ -1,4 +1,3 @@
-const int NL = -1e9 - 1;
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
@@ -19,8 +18,8 @@ public:
         
         int n = nums.size();
         
-        int candidate1 = NL; 
-        int candidate2 = NL;
+        int candidate1 = -1e9 - 1; 
+        int candidate2 = -1e9 - 1;
         
         int cnt1 = 0;
         int cnt2 = 0;
