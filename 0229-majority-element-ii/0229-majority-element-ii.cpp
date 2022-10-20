@@ -18,7 +18,6 @@ public:
         // because of floor, n = 1 will have 1 majority element itself.
         
         int n = nums.size();
-        // if(n == 1) return nums;
         
         int candidate1 = NL; 
         int candidate2 = NL;
@@ -51,8 +50,8 @@ public:
             else if(x == candidate2) cnt2++;
         }
         
-        if(candidate1 != NL and cnt1 > n/3) ans.push_back(candidate1);
-        if(candidate2 != NL and cnt2 > n/3) ans.push_back(candidate2);
+        if(cnt1 > n/3) ans.push_back(candidate1);
+        if(cnt2 > n/3) ans.push_back(candidate2);
         return ans;
     }
 };
