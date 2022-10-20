@@ -16,8 +16,6 @@ public:
         // because of floor, n = 2, can have 2 majority element.
         // because of floor, n = 1 will have 1 majority element itself.
         
-        int n = nums.size();
-        
         int candidate1 = -1e9 - 1; 
         int candidate2 = -1e9 - 1;
         
@@ -49,6 +47,7 @@ public:
             else if(x == candidate2) cnt2++;
         }
         
+        int n = nums.size();
         if(cnt1 > n/3) ans.push_back(candidate1);
         if(cnt2 > n/3) ans.push_back(candidate2);
         return ans;
