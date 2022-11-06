@@ -7,11 +7,8 @@ public:
         int ans = 0;
         bool hasOdd = false;
         for(auto &[_,s]: mp){
-            if(s&1) {
-                ans += s - 1;
-                hasOdd = true;
-            }
-            else ans += s;
+            if(s&1) hasOdd = true;
+            ans += (s/2)  * 2;
         }
       
         return ans + hasOdd;
